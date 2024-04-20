@@ -24,7 +24,7 @@ async def handle_function(matcher : Matcher,args:Message = CommandArg()):
 
 @weather.got("location",prompt="请输入地名")
 async def got_location(location: str = ArgPlainText()):
-    '''try :
+    try :
         result = requests.get(API,params={
             'key' : KEY,
             'location' : location,
@@ -45,11 +45,11 @@ async def got_location(location: str = ArgPlainText()):
         raise
     except Exception as e:
         print ("获取天气失败：{}".format(e))
-        pass'''
+        pass
     
-    try :
+    '''try :
         await weather.finish("今天{}的天气是{}".format(location))
     except MatcherException :
             raise
     except Exception as e :
-        pass   
+        pass   '''
