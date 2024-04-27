@@ -1,10 +1,8 @@
 from nonebot import on_message
 from nonebot.rule import keyword
-from nonebot.exception import FinishedException,MatcherException
+from nonebot.exception import FinishedException
 from nonebot.params import EventPlainText
 from nonebot.adapters.onebot.v11 import MessageSegment
-from nonebot.matcher import Matcher
-from typing import Annotated
 from .get_info import get_videoinfo,get_pic
 
 Bili_Analys = on_message(rule=keyword('bilibili.com/video/'),priority=10,block=True)
