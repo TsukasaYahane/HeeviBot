@@ -26,7 +26,7 @@ async def Video_Analys(message=EventPlainText()):
         Video_Favorite = video_data['favorite']
         Video_Coin =video_data['coin']
         Video_Share = video_data['share']
-        Video_pic = video_data['pic']
+        Video_pic = info['pic']
         await Bili_Analys.finish(MessageSegment.image(Video_pic)+MessageSegment.text("视频标题：{}\t视频分区：{}\nup主：{}\t播放量：{}\n点赞：{}\t投币：{}\n收藏：{}\t评论：{}\n弹幕：{}\t分享：{}\n视频简介：{}".format(Video_Name,Video_Area,Video_Oner,Video_view,Video_Like,Video_Coin,Video_Favorite,Video_Reply,Video_Danmu,Video_Share,Video_desc)))
     except FinishedException :
         raise
