@@ -13,9 +13,3 @@ def get_videoinfo(BV) :
     },headers=headers,timeout = 10)
     video_data = data.json()
     return video_data
-
-def get_pic(url):
-    response = requests.get(url)
-    code = base64.b64encode(BytesIO(response.content).read())
-    imgdata = base64.b64decode(code)
-    return
