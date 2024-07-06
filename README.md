@@ -19,6 +19,9 @@
 :black_square_button:跑团工具  
 :black_square_button:开发者留言  
 :black_square_button:那年今日  
+:black_square_button:点歌/音乐下载  
+:black_square_button:pixiv图片  
+:black_square_button:帮助菜单  
 
 # 更新日志
 
