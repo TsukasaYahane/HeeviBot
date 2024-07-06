@@ -7,7 +7,6 @@
 本项目由个人以学习为目的独立开发维护，欢迎各位提出意见和建议  
 
 # 相关仓库  
-## Nonebot
 
 | [![](https://avatars.githubusercontent.com/u/63496654?s=200&v=4)](https://github.com/nonebot/nonebot2) | [![](https://avatars.githubusercontent.com/u/148437753?s=200&v=4)](https://github.com/LagrangeDev/Lagrange.Core) |
 | :---: | :---: |
