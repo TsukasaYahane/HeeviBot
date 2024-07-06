@@ -24,7 +24,7 @@ async def handle_function(matcher : Matcher,args:Message = CommandArg()):
 async def got_location(location: str = ArgPlainText()):
     data = fetchWeather(location)
     if not 'results' in data :
-        await weather.reject("该地区暂未支持天气查询，请重新输入地名")   
+        await weather.finish("该地区暂未支持天气查询，请重试")   
     try :
         
         weatherinfo = data['results'][0].get('now',{})
