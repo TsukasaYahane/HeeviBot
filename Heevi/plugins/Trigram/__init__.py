@@ -1,4 +1,4 @@
-from nonebot import on_command
+from nonebot import on_command,logger
 from nonebot.rule import to_me
 from nonebot.matcher import Matcher
 from nonebot.adapters import Event
@@ -16,5 +16,6 @@ async def handle_Trigram(matcher:Matcher,args=Message) :
     except MatcherException :
         raise
     except Exception as e :
-        pass
+        logger.error("起卦失败，原因为：{}".format(e))
+        Trigram.finish("插件异常，请检查控制台或联系管理员")
 
