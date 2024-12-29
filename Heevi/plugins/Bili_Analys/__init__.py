@@ -1,4 +1,4 @@
-from nonebot import on_message
+from nonebot import on_message,logger
 from nonebot.rule import regex
 from nonebot.exception import FinishedException
 from nonebot.adapters.onebot.v11 import MessageSegment, Event
@@ -11,7 +11,7 @@ def num_handle(num: int) -> str:
         return f"{num / 10000:.2f}万"
     return str(num)
 
-pattern = r'(b23.tv/|bilibili.com/video/|^BV[a-zA-Z0-9]{10})'
+pattern = r'(b23.tv/|bilibili.com/video/|BV[a-zA-Z0-9]{10})'
 
 Bili_Analys = on_message(rule=regex(pattern, flags=re.I), priority=10, block=True)
 
@@ -23,28 +23,27 @@ async def Video_Analys(event: Event):
         
         try:
             data = json.loads(content)
-            if data.get('title') == '哔哩哔哩' or '[QQ小程序]' in data.get('prompt'):
-                qqdocurl = data['meta']['detail_1']['qqdocurl']
-                match = re.search(r'BV[a-zA-Z0-9]{10}', qqdocurl)
-                if match:
-                    BV = match.group(0)
+            title = data.get('title', '')
+            prompt = data.get('prompt', '')
+            
+            if title == '哔哩哔哩' or '[QQ小程序]' in prompt:
+                qqdocurl = data.get('meta', {}).get('detail_1', {}).get('qqdocurl', '')
+                if qqdocurl:
+                    BV = b23tv_get(qqdocurl)
         except json.JSONDecodeError:
             pass
         
         if not BV:
-            url_pattern = re.compile(r'https?://(?:b23\.tv/\S{7})', re.IGNORECASE)
+            url_pattern = re.compile(r"b23\.tv/([a-zA-Z0-9]{7})", re.IGNORECASE)
             urls = url_pattern.findall(content)
             if urls:
-                url = urls[0]
                 try:
-                    if 'b23.tv' in url:
-                        BV = b23tv_get(url)
-                    else:
-                        match = re.search(r'BV[a-zA-Z0-9]{10}', url)
-                        if match:
-                            BV = match.group(0)
+                    url = f"https://b23.tv/{urls[0]}"
+                    BV = b23tv_get(url)
                 except Exception as e:
+                    logger.error(f"视频解析错误：{e}")
                     await Bili_Analys.finish(f"视频解析错误：{e}")
+                    
         
         if not BV:
             match = re.search(r'BV[a-zA-Z0-9]{10}', content)
@@ -53,6 +52,7 @@ async def Video_Analys(event: Event):
         
         if not BV:
             await Bili_Analys.finish("未能提取到有效的 BV 号")
+            logger.error("未能提取有效BV号")
         
         data = get_videoinfo(BV)
         info = data['data']
