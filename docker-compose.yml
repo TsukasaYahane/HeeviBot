@@ -1,0 +1,7 @@
+services:
+  heevi:
+    build:
+      context: .
+      dockerfile: ./Dockerfile
+
+ 
