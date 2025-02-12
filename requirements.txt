@@ -5,3 +5,6 @@ pyncm==1.7.1
 qrcode==8.0
 Requests==2.32.3
 sxtwl==2.0.7
+nonebot2==2.4.1
+nonebot-adapter-onebot==2.4.6
+nonebot2[fastapi]==0.115.8
