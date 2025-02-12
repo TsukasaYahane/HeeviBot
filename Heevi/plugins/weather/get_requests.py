@@ -9,9 +9,7 @@ import io
 from datetime import datetime
 import matplotlib.dates as mdates
 import matplotlib.font_manager as fm
-
-plt.rcParams['font.sans-serif'] = ['SimHei']
-plt.rcParams['axes.unicode_minus'] = False 
+import os
 
 class weather:
     def __init__(self):
@@ -100,21 +98,25 @@ class weather:
         temp_min = [int(day["最低温度"].replace("℃", "")) for day in data]
         weather_texts = [day["白天天气"] for day in data]
 
+        pluginDir = os.path.dirname(os.path.abspath(__file__))
+        fontDir = os.path.join(pluginDir,'SimHei.ttf')
+        font = fm.FontProperties(fname=fontDir)
+
         plt.figure(figsize=(10,5))
         plt.plot(dates,temp_max,label='最高温度',marker='o',color = 'red',linestyle='-')
         plt.plot(dates, temp_min, label="最低温度", marker="o", color="blue", linestyle="--")
 
         for i, (date, text, t_max, t_min) in enumerate(zip(dates, weather_texts, temp_max, temp_min)):
-            plt.text(date, t_max + 1, f"{t_max}℃", ha="center", fontsize=10, color="red")
-            plt.text(date, t_min - 2, f"{t_min}℃", ha="center", fontsize=10, color="blue")
-            plt.text(date, (t_max + t_min) / 2, text, ha="center", fontsize=9, color="green")
+            plt.text(date, t_max + 1, f"{t_max}℃", ha="center", fontsize=10, color="red",fontproperties = font)
+            plt.text(date, t_min - 2, f"{t_min}℃", ha="center", fontsize=10, color="blue",fontproperties = font)
+            plt.text(date, (t_max + t_min) / 2, text, ha="center", fontsize=9, color="green",fontproperties = font)
 
-        plt.title(f"{location} 7 天天气趋势", fontsize=14)
-        plt.xlabel("日期", fontsize=12)
-        plt.ylabel("温度 (℃)", fontsize=12)
+        plt.title(f"{location} 7 天天气趋势", fontsize=14,fontproperties = font)
+        plt.xlabel("日期", fontsize=12,fontproperties = font)
+        plt.ylabel("温度 (℃)", fontsize=12,fontproperties = font)
         plt.xticks(rotation=45)
         plt.gca().xaxis.set_major_formatter(mdates.DateFormatter("%m-%d"))
-        plt.legend()
+        plt.legend(prop=font)
         plt.grid(True, linestyle="--", alpha=0.6)
 
         img_bytes = io.BytesIO()
