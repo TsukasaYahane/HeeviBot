@@ -1,0 +1,34 @@
+# 白名单：默认全部忽略，只放行代码。人设、记忆、配置、日志、素材、备份都只留在本地。
+/*
+
+!/.gitignore
+!/README.md
+!/.env.example
+!/Cargo.toml
+!/Cargo.lock
+!/src/
+
+# 工具：只放通用的
+!/tools/
+/tools/*
+!/tools/docx_to_md.py
+
+# meme-generator 启动 / 字体脚本（.venv、字体文件、日志留本地）
+!/meme_server/
+/meme_server/*
+!/meme_server/serve.py
+!/meme_server/start.bat
+!/meme_server/fetch_fonts.py
+!/meme_server/fonts.json
+!/meme_server/install_fonts.ps1
+!/meme_server/install_fonts_system.ps1
+
+# 以下永远不进仓库（即使上面放行的目录里出现）
+.env
+.env.*
+!/.env.example
+*.bak*
+*.db
+*.db-*
+__pycache__/
+*.log
