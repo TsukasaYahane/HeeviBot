@@ -197,6 +197,43 @@ cargo test
 cargo test ledger_live -- --ignored --nocapture
 ```
 
+## 第三方项目
+
+### 运行时依赖的外部项目
+
+| 项目 | 用途 | 仓库 |
+|---|---|---|
+| DeepSeek Harness | 思考与工具调用（headless 子进程） | https://github.com/deepseek-ai/deepseek-harness |
+| SnowLuma | OneBot 11 实现，连接 QQ | https://github.com/SnowLuma/SnowLuma |
+| LuckyLilliaBot（LLBot） | 另一种 OneBot 11 实现，可替代 SnowLuma | https://github.com/LLOneBot/LuckyLilliaBot |
+| OneBot 11 | 协议标准 | https://github.com/botuniverse/onebot-11 |
+| meme-generator | 梗图生成服务（`meme_server/`，字体也取自该仓库） | https://github.com/MemeCrafters/meme-generator |
+| Codex | `codex app-server` 查额度与任务进度 | https://github.com/openai/codex |
+
+### Rust 依赖（`Cargo.toml` 直接依赖）
+
+| crate | 版本 | 用途 | 仓库 | 许可 |
+|---|---|---|---|---|
+| tokio | 1.53 | 异步运行时 | https://github.com/tokio-rs/tokio | MIT |
+| tokio-tungstenite | 0.20 | OneBot WebSocket 客户端 | https://github.com/snapview/tokio-tungstenite | MIT |
+| futures-util | 0.3 | 流 / Future 工具 | https://github.com/rust-lang/futures-rs | MIT / Apache-2.0 |
+| axum | 0.7 | 心智 WebUI | https://github.com/tokio-rs/axum | MIT |
+| reqwest | 0.12 | HTTP 客户端（视觉模型、数据源） | https://github.com/seanmonstar/reqwest | MIT / Apache-2.0 |
+| rusqlite | 0.31 | SQLite 记忆库（bundled，内置 SQLite） | https://github.com/rusqlite/rusqlite | MIT |
+| jieba-rs | 0.7 | 中文分词与词性 | https://github.com/messense/jieba-rs | MIT |
+| serde / serde_json | 1 | 序列化 | https://github.com/serde-rs/serde · https://github.com/serde-rs/json | MIT / Apache-2.0 |
+| regex | 1 | 正则 | https://github.com/rust-lang/regex | MIT / Apache-2.0 |
+| image | 0.25 | 图片处理 | https://github.com/image-rs/image | MIT / Apache-2.0 |
+| png | 0.18 | 索引色 PNG 编码 | https://github.com/image-rs/image-png | MIT / Apache-2.0 |
+| fontdue | 0.9 | 卡片文字栅格化 | https://github.com/mooman219/fontdue | MIT / Apache-2.0 / Zlib |
+| chrono | 0.4 | 日期时间 | https://github.com/chronotope/chrono | MIT / Apache-2.0 |
+| tracing / tracing-subscriber / tracing-appender | 0.1 / 0.3 / 0.2 | 日志 | https://github.com/tokio-rs/tracing | MIT |
+| sysinfo | 0.39 | 进程指标 | https://github.com/GuillaumeGomez/sysinfo | MIT |
+| anyhow | 1 | 错误处理 | https://github.com/dtolnay/anyhow | MIT / Apache-2.0 |
+| dotenvy | 0.15 | 读取 `.env` | https://github.com/allan2/dotenvy | MIT |
+
+间接依赖见 `Cargo.lock`。数据来源（非 git 仓库）：Liquipedia（CS2）、VLR.gg、lolesports、B 站公开接口。
+
 ## 许可
 
 暂未指定许可证；如需使用或二次分发请先联系作者。
